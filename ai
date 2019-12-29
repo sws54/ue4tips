@@ -1,0 +1,19 @@
+ai aim
+
+
+	/** Retrieve the focal point this controller should focus to on given actor. */
+	virtual FVector GetFocalPointOnActor(const AActor *Actor) const override;
+
+FVector AICustomController::GetFocalPointOnActor(const AActor *Actor) const
+{
+	if (Actor == nullptr)
+	{
+		return FAISystem::InvalidLocation;
+	}
+
+	//get actor location
+	FVector Loc = Actor->GetActorLocation();
+	Loc = FVector(Loc.X, Loc.Y, Loc.Z + 70.0f);
+
+	return Loc;
+}
