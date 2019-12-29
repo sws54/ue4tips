@@ -1,8 +1,8 @@
-ai aim
+#AI Aim
 
 
-	/** Retrieve the focal point this controller should focus to on given actor. */
-	virtual FVector GetFocalPointOnActor(const AActor *Actor) const override;
+/** Retrieve the focal point this controller should focus to on given actor. */
+virtual FVector GetFocalPointOnActor(const AActor *Actor) const override;
 
 FVector AICustomController::GetFocalPointOnActor(const AActor *Actor) const
 {
