@@ -1,0 +1,39 @@
+#Log Function
+
+void ARCore::RLog(const FString& InString)
+{
+
+#if !(UE_BUILD_SHIPPING || UE_BUILD_TEST) // Do not Print in Shipping or Test
+
+	//get world
+	UWorld* World = GetWorld();
+
+	//setup prefix
+	FString Prefix;
+	if (World)
+	{
+		if (World->WorldType == EWorldType::PIE)
+		{
+			switch (World->GetNetMode())
+			{
+			case NM_Client:
+				Prefix = FString::Printf(TEXT("Client %d: "), GPlayInEditorID - 1);
+				break;
+			case NM_DedicatedServer:
+			case NM_ListenServer:
+				Prefix = FString::Printf(TEXT("Server: "));
+				break;
+			case NM_Standalone:
+				break;
+			}
+		}
+	}
+
+	//final string
+	const FString FinalDisplayString = Prefix + InString;
+
+	//print log
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *FinalDisplayString);
+
+#endif
+}
